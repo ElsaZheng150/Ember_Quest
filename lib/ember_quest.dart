@@ -7,8 +7,11 @@ import 'objects/ground_block.dart';
 import 'objects/platform_block.dart';
 import 'objects/star.dart';
 import 'package:flutter/material.dart';
+import 'package:flame/events.dart';
 
-class EmberQuestGame extends FlameGame {
+class EmberQuestGame extends FlameGame
+    with HasCollisionDetection, HasKeyboardHandlerComponents {
+
   late EmberPlayer _ember;
   double objectSpeed = 0.0;
   late double lastBlockXPosition = 0.0;
@@ -45,7 +48,7 @@ class EmberQuestGame extends FlameGame {
     }//end of for loop
 
     _ember = EmberPlayer(
-      position: Vector2(128, canvasSize.y - 70),
+      position: Vector2(128, canvasSize.y - 128),
     );
     world.add(_ember);
   }//end of initializeGame
