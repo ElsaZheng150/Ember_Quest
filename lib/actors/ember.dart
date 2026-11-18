@@ -64,6 +64,11 @@ class EmberPlayer extends SpriteAnimationComponent
         // collision normal by separation distance.
         position += collisionNormal.scaled(separationDistance);
       }//end of if
+
+      if (other is Star) {
+        other.removeFromParent();
+        game.starsCollected++;
+      }//end of if
     }//end of if
 
     super.onCollision(intersectionPoints, other);
@@ -81,6 +86,7 @@ class EmberPlayer extends SpriteAnimationComponent
 // to make it blink.
   void hit() {
     if (!hitByEnemy) {
+      game.health--;
       hitByEnemy = true;
     }
     add(
@@ -88,7 +94,7 @@ class EmberPlayer extends SpriteAnimationComponent
         EffectController(
           alternate: true,
           duration: 0.1,
-          repeatCount: 6,
+          repeatCount: 5,
         ),
       )..onComplete = () {
         hitByEnemy = false;
